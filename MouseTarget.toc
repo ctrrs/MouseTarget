@@ -1,0 +1,11 @@
+## Interface: 120001, 120005
+## Title: Mouse Target
+## Notes: Displays the name of the unit under the mouse with dynamic colors.
+## Author: fae
+## Version: 1.1
+## Category: fae Utilities
+## IconTexture: Interface\AddOns\MouseTarget\logo.tga
+## SavedVariables: MouseTargetDB
+
+MouseTarget.lua
+Config.lua
