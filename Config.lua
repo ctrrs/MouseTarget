@@ -167,8 +167,32 @@ local function RegisterSettings()
     local loginMessageSet = Settings.RegisterAddOnSetting(category, "MouseTargetShowLoginMessage", "showLoginMessage", MouseTargetDB, Settings.VarType.Boolean, "Show Welcome Message", true)
     Settings.CreateCheckbox(category, loginMessageSet, "Show the welcome message in the chat when the addon loads.")
 
+    -- 7. RESET TO DEFAULTS
+    CreateHeading(category, "Danger Zone")
+    local layout = SettingsPanel:GetLayout(category)
+    layout:AddInitializer(Settings.CreateElementInitializer("SettingsListButtonTemplate", {
+        name = "Reset to Defaults",
+        tooltip = "Revert all settings to the hardcoded defaults. This will reload the UI.",
+        onClick = function()
+            StaticPopup_Show("MOUSETARGET_CONFIRM_RESET")
+        end
+    }))
+
     Settings.RegisterAddOnCategory(category)
 end
+
+StaticPopupDialogs["MOUSETARGET_CONFIRM_RESET"] = {
+    text = "Are you sure you want to reset Mouse Target settings to defaults? This will reload the UI.",
+    button1 = "Yes",
+    button2 = "No",
+    OnAccept = function()
+        MouseTargetDB = {}
+        ReloadUI()
+    end,
+    timeout = 0,
+    whileDead = true,
+    hideOnEscape = true,
+}
 
 -- Initialization
 local frame = CreateFrame("Frame")
